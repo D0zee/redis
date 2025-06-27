@@ -54,7 +54,7 @@ auto receiver(std::shared_ptr<connection> conn) -> asio::awaitable<void>
    request req;
    req.push("SUBSCRIBE", "channel");
 
-   generic_response resp;
+   boost::redis::generic_flat_response resp;
    conn->set_receive_response(resp);
 
    // Loop while reconnection is enabled
@@ -77,7 +77,7 @@ auto receiver(std::shared_ptr<connection> conn) -> asio::awaitable<void>
          std::cout << resp.value().at(1).value << " " << resp.value().at(2).value << " "
                    << resp.value().at(3).value << std::endl;
 
-         consume_one(resp);
+         // consume_one(resp);
       }
    }
 }
